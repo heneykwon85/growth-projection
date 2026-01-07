@@ -3,7 +3,6 @@ __pycache__/
 *.pyo
 users.db
 .DS_Store
-.env
-venv/
 .idea/
 .vscode/
+.env

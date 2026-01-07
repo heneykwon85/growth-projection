@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Projection & DAU Prediction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="top-bar">
+            <div class="logo">Next Growth <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"
+                    class="logo-icon"></div>
+            <div class="user-profile">
+                <span class="avatar" style="margin-right: 12px; font-size: 0.8rem;">{{ user['email'][:2].upper()
+                    }}</span>
+                {% if user['is_admin'] %}
+                <a href="{{ url_for('admin_panel') }}"
+                    style="margin-right: 16px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Admin</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}"
+                    style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Logout</a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <header class="page-header">
+                <h1>DAU Growth Projection</h1>
+                <p>DAU Prediction & Simulation based on Prophet Model</p>
+            </header>
+
+            <section class="controls-section glass-panel">
+                <div class="tabs">
+                    <button class="tab active">Forecast based on new targets</button>
+                    <button class="tab">Forecast based on DAU targets</button>
+                    <button class="tab">Batch forecast</button>
+                </div>
+
+                <div class="form-grid">
+                    <!-- Row 1: Date -->
+                    <div class="form-row">
+                        <div class="field-group">
+                            <label class="required">Forecast date</label>
+                            <div class="date-range-group">
+                                <input type="date" value="2026-01-01" class="input-premium" id="start-date">
+                                <span class="range-sep">~</span>
+                                <input type="date" value="2026-12-31" class="input-premium" id="end-date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: App, Country, OS -->
+                    <div class="form-row three-col">
+                        <div class="field-group">
+                            <label class="required">App ID</label>
+                            <select class="input-premium">
+                                <option>Market Lenz Global</option>
+                                <option>IBKR</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label class="required">Country</label>
+                            <select class="input-premium">
+                                <option>Global (all)</option>
+                                <option>KR</option>
+                                <option>US</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>OS</label>
+                            <select class="input-premium">
+                                <option>All</option>
+                                <option>iOS</option>
+                                <option>Android</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Metrics -->
+                    <div class="form-row four-col">
+                        <div class="field-group">
+                            <label class="required">Current DAU</label>
+                            <input type="text" value="1,500,000" class="input-premium" id="current-dau">
+                        </div>
+                        <div class="field-group">
+                            <label class="required">LT365</label>
+                            <input type="number" value="99.18" class="input-premium" id="lt365">
+                        </div>
+                        <div class="field-group">
+                            <label class="required">Daily New Users</label>
+                            <input type="text" value="967,090" class="input-premium" id="dnu">
+                        </div>
+                        <div class="field-group">
+                            <label>LT60</label>
+                            <input type="number" value="45.5" class="input-premium" id="lt60">
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Advanced -->
+                    <div class="form-row two-col-mixed">
+                        <div class="field-group">
+                            <label class="required">Stock old user decay rate percentiles</label>
+                            <div class="input-with-unit">
+                                <input type="number" value="50" class="input-premium" id="decay-rate">
+                                <span class="unit">%</span>
+                            </div>
+                            <span class="field-hint">Addition and subtraction in multiples of 10 only</span>
+                        </div>
+                        <div class="field-group result-display">
+                            <label>Predicted DAU (2026-12-31)</label>
+                            <div class="value-highlight">194.77 M</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn-primary">Forecast</button>
+                    <button class="btn-secondary">Share</button>
+                </div>
+            </section>
+
+            <section class="chart-section glass-panel">
+                <div class="chart-header">
+                    <div class="chart-title">DAU Prediction Trend</div>
+                    <div class="chart-summary">
+                        <div class="summary-item">
+                            <span class="label">Daily New Users</span>
+                            <span class="value">967,090</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Current DAU</span>
+                            <span class="value">162,242,233</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Predicted DAU</span>
+                            <span class="value">194,766,177</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="dauChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

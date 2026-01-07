@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Approval - Next Growth</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .auth-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .auth-box {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .status-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+                Next Growth <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-icon">
+            </div>
+
+            <div class="status-icon">⏳</div>
+            <h2 style="margin-bottom: 16px;">Approval Pending</h2>
+            <p style="color: #64748b; line-height: 1.6; margin-bottom: 24px;">
+                Your account has been created but requires administrator approval.<br>
+                Please wait for the admin (henry@nextsecurities.com) to approve your access.
+            </p>
+
+            <a href="{{ url_for('logout') }}" class="btn-secondary" style="text-decoration: none;">Logout</a>
+        </div>
+    </div>
+</body>
+
+</html>

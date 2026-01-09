@@ -50,7 +50,7 @@
                             <div class="date-range-group">
                                 <input type="date" value="2026-01-01" class="input-premium" id="start-date">
                                 <span class="range-sep">~</span>
-                                <input type="date" value="2026-12-31" class="input-premium" id="end-date">
+                                <input type="date" value="2026-03-31" class="input-premium" id="end-date">
                             </div>
                         </div>
                     </div>
@@ -86,15 +86,15 @@
                     <div class="form-row four-col">
                         <div class="field-group">
                             <label class="required">Current DAU</label>
-                            <input type="text" value="1,500,000" class="input-premium" id="current-dau">
+                            <input type="text" value="50,000" class="input-premium" id="current-dau">
                         </div>
                         <div class="field-group">
                             <label class="required">LT365</label>
                             <input type="number" value="99.18" class="input-premium" id="lt365">
                         </div>
                         <div class="field-group">
-                            <label class="required">Daily New Users</label>
-                            <input type="text" value="967,090" class="input-premium" id="dnu">
+                            <label class="required">Daily New Users (DNU)</label>
+                            <input type="text" value="3,000" class="input-premium" id="dnu">
                         </div>
                         <div class="field-group">
                             <label>LT60</label>
@@ -113,8 +113,8 @@
                             <span class="field-hint">Addition and subtraction in multiples of 10 only</span>
                         </div>
                         <div class="field-group result-display">
-                            <label>Predicted DAU (2026-12-31)</label>
-                            <div class="value-highlight">194.77 M</div>
+                            <label>Predicted DAU (End Date)</label>
+                            <div class="value-highlight">Calculating...</div>
                         </div>
                     </div>
                 </div>
@@ -131,20 +131,56 @@
                     <div class="chart-summary">
                         <div class="summary-item">
                             <span class="label">Daily New Users</span>
-                            <span class="value">967,090</span>
+                            <span class="value">3,000</span>
                         </div>
                         <div class="summary-item">
                             <span class="label">Current DAU</span>
-                            <span class="value">162,242,233</span>
+                            <span class="value">50,000</span>
                         </div>
                         <div class="summary-item">
                             <span class="label">Predicted DAU</span>
-                            <span class="value">194,766,177</span>
+                            <span class="value">-</span>
                         </div>
                     </div>
                 </div>
                 <div class="chart-container">
                     <canvas id="dauChart"></canvas>
+                </div>
+            </section>
+
+            <section class="table-section glass-panel">
+                <div class="section-header">
+                    <div class="section-title">
+                        DAU Forecast Detailed Data
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.6;">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4"></path>
+                            <path d="M12 8h.01"></path>
+                        </svg>
+                    </div>
+                    <button class="btn-export" id="btn-export">Export CSV</button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Operating system</th>
+                                <th>Forecast DAU (total)</th>
+                                <th>Growth (Net)</th>
+                                <th>Growth (%)</th>
+                                <th>Predict new DAU</th>
+                                <th>Forecast stock DAU</th>
+                            </tr>
+                        </thead>
+                        <tbody id="forecast-table-body">
+                            <!-- Populated by JS -->
+                            <tr class="empty-state-row">
+                                <td colspan="5" class="empty-state">No data available</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </main>

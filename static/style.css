@@ -259,8 +259,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .field-hint {
     margin-top: 6px;
     font-size: 0.75rem;
-    color: #ef4444;
-    /* Error red color as noticed in screenshot */
+    color: var(--text-muted);
+    /* Changed from red to gray */
     opacity: 0.8;
 }
 
@@ -363,4 +363,97 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: relative;
     height: 480px;
     width: 100%;
+}
+
+/* Detailed Data Table Section */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-export {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-export:hover {
+    background-color: #2563eb;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    max-height: 500px;
+    /* Scrollable if too long */
+    overflow-y: auto;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    min-width: 800px;
+    /* Ensure generic width on small screens */
+}
+
+.data-table th {
+    background-color: #f1f5f9;
+    /* Slate 100 */
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tr:hover td {
+    background-color: rgba(241, 245, 249, 0.5);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+}
+
+.text-success {
+    color: #22c55e;
+    /* Green 500 */
+}
+
+.text-danger {
+    color: #ef4444;
+    /* Red 500 */
 }

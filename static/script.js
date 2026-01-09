@@ -117,6 +117,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     });
 
+    const exportBtn = document.getElementById('btn-export');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+            if (!window.lastForecastData || window.lastForecastData.length === 0) {
+                alert('No data to export. Please run a forecast first.');
+                return;
+            }
+
+            const headers = ['Date', 'Operating system', 'Forecast DAU (total)', 'Growth (Net)', 'Growth (%)', 'Predict new DAU', 'Forecast stock DAU'];
+            const csvContent = [
+                headers.join(','),
+                ...window.lastForecastData.map(row => [
+                    row.date,
+                    row.os,
+                    Math.round(row.total),
+                    Math.round(row.growthNet),
+                    row.growthPercent.toFixed(2) + '%',
+                    Math.round(row.newUsers),
+                    Math.round(row.stock)
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `dau_forecast_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    }
+
     // Helper to format inputs with commas
     const formatNumberInput = (input) => {
         let value = input.value.replace(/,/g, '');
@@ -164,11 +198,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const predictionData = [];
         const labels = [];
+        const stockData = [];
+        const newUserData = [];
 
         // Base DAU
         const currentDauInput = document.getElementById('current-dau');
         // Strip commas for calculation
-        let currentDAU = currentDauInput ? parseFloat(currentDauInput.value.replace(/,/g, '')) : 1500000;
+        let currentDAU = currentDauInput ? parseFloat(currentDauInput.value.replace(/,/g, '')) : 50000;
 
         // Growth parameters
         const lt365Element = document.getElementById('lt365');
@@ -195,16 +231,67 @@ document.addEventListener('DOMContentLoaded', () => {
         // Generate Prediction (No History, just Forecast range)
         let date = new Date(start);
 
+        // Prepare table data
+        window.lastForecastData = [];
+        const tableBody = document.getElementById('forecast-table-body');
+        if (tableBody) tableBody.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+
+        // Helper to get OS value safely (assuming 3rd select)
+        const selects = document.querySelectorAll('select.input-premium');
+        const osValue = selects[2] ? selects[2].value : 'All';
+
         for (let i = 0; i <= daysPrediction; i++) {
-            labels.push(date.toISOString().split('T')[0]);
+            const dateStr = date.toISOString().split('T')[0];
+            labels.push(dateStr);
 
             // Push current value
             predictionData.push(currentDAU);
+
+            // Calculate Components
+            const newUsers = dailyNewUsers;
+            const stockDAU = Math.max(0, currentDAU - newUsers);
+
+            // Calculate Growth
+            let netGrowth = 0;
+            let growthPercent = 0;
+            if (i > 0) {
+                const prevDAU = predictionData[i - 1];
+                netGrowth = currentDAU - prevDAU;
+                growthPercent = (netGrowth / prevDAU) * 100;
+            }
+
+            // Store detailed data
+            const rowData = {
+                date: dateStr,
+                os: osValue,
+                total: currentDAU,
+                growthNet: netGrowth,
+                growthPercent: growthPercent,
+                newUsers: newUsers,
+                stock: stockDAU
+            };
+            window.lastForecastData.push(rowData);
+
+            // Create Table Row
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${dateStr}</td>
+                <td>${osValue}</td>
+                <td>${Math.round(currentDAU).toLocaleString()}</td>
+                <td class="${netGrowth >= 0 ? 'text-success' : 'text-danger'}">${netGrowth > 0 ? '+' : ''}${Math.round(netGrowth).toLocaleString()}</td>
+                <td class="${growthPercent >= 0 ? 'text-success' : 'text-danger'}">${growthPercent > 0 ? '+' : ''}${growthPercent.toFixed(2)}%</td>
+                <td>${Math.round(newUsers).toLocaleString()}</td>
+                <td>${Math.round(stockDAU).toLocaleString()}</td>
+            `;
+            fragment.appendChild(tr);
 
             // Calculate next day
             currentDAU = (currentDAU * retentionRate) + dailyNewUsers;
             date.setDate(date.getDate() + 1);
         }
+
+        if (tableBody) tableBody.appendChild(fragment);
 
         dauChart.data.labels = labels;
         // We only show Prediction now, so clear History or leave it empty

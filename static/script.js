@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update summary numbers
         const lastVal = predictionData[predictionData.length - 1];
         document.querySelector('.value-highlight').textContent =
-            (lastVal / 1000000).toLocaleString('en-US', { maximumFractionDigits: 2 }) + ' M';
+            (lastVal / 1000).toLocaleString('en-US', { maximumFractionDigits: 2 }) + ' K';
 
         // Update Chart Header Summary
         // Daily New Users (Sync with input)

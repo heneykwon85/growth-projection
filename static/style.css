@@ -457,3 +457,126 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #ef4444;
     /* Red 500 */
 }
+
+/* DNU Table Styles */
+.dnu-entry-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.dnu-entry-table th,
+.dnu-col-header th {
+    background: #f8fafc;
+    padding: 12px 8px;
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--glass-border);
+    white-space: nowrap;
+}
+
+.dnu-entry-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.dnu-section-header td {
+    background: #f1f5f9;
+    font-weight: 700;
+    color: var(--primary-color);
+    padding: 12px 14px;
+
+    /* Spacing between sections */
+    border-top: 30px solid transparent;
+    background-clip: padding-box;
+}
+
+/* Remove top spacing for the very first section header if desired, 
+   but having it provides nice breathing room from the top tabs. 
+   We will keep it or optional: 
+   #section-1-body .dnu-section-header td { border-top: none; }
+   Let's keep it for consistent spacing.
+*/
+
+.input-compact {
+    width: 100%;
+    min-width: 60px;
+    padding: 6px 8px;
+    border: 1px solid var(--glass-border);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    background: white;
+    text-align: right;
+}
+
+.input-compact:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.channel-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.dnu-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.input-plain {
+    border: none;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 100%;
+}
+
+.input-plain:focus {
+    outline: none;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.btn-add-row {
+    background: none;
+    border: 1px dashed var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-add-row:hover {
+    background: #f8fafc;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.section-total-row td,
+.grand-total-row td {
+    font-weight: 700;
+    background: #f1f5f9;
+    text-align: right;
+    padding: 10px 8px;
+}
+
+.section-total-row td:first-child,
+.grand-total-row td:first-child {
+    text-align: left;
+}
+
+.grand-total-row td {
+    background: #e2e8f0;
+    font-size: 0.95rem;
+    border-top: 2px solid var(--glass-border);
+}

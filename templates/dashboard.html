@@ -37,152 +37,462 @@
 
             <section class="controls-section glass-panel">
                 <div class="tabs">
-                    <button class="tab active">Forecast based on new targets</button>
-                    <button class="tab">Forecast based on DAU targets</button>
+                    <button class="tab active" data-tab="forecast">Forecast based on new targets</button>
+                    <button class="tab" data-tab="dnu">DNU by Channel</button>
                     <button class="tab">Batch forecast</button>
                 </div>
 
-                <div class="form-grid">
-                    <!-- Row 1: Date -->
-                    <div class="form-row">
-                        <div class="field-group">
-                            <label class="required">Forecast date</label>
-                            <div class="date-range-group">
-                                <input type="date" value="2026-01-01" class="input-premium" id="start-date">
-                                <span class="range-sep">~</span>
-                                <input type="date" value="2026-03-31" class="input-premium" id="end-date">
+                <div id="dnu-channel-view" style="display: none;">
+                    <div class="glass-panel">
+                        <div class="table-container">
+                            <table class="dnu-entry-table">
+                                <tbody id="section-1-body" data-section="1">
+                                    <!-- Section 1: Paid Ads - Android -->
+                                    <tr class="dnu-section-header">
+                                        <td colspan="9">Section 1. Paid Ads - Android</td>
+                                    </tr>
+                                    <tr class="dnu-col-header">
+                                        <th>Channel</th>
+                                        <th>DNU</th>
+                                        <th>Budget ($)</th>
+                                        <th>CPA ($)</th>
+                                        <th>DNU D1 RR (%)</th>
+                                        <th>LT30</th>
+                                        <th>LT180</th>
+                                        <th>ARPU ($)</th>
+                                        <th>ROI</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Google Ads"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="500"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="7000"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="14" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="35"></td>
+                                        <td><input type="number" class="input-compact" value="12.45"></td>
+                                        <td><input type="number" class="input-compact" value="37.35"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="2.36"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Meta Ads"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="0"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="0"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="18" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="38"></td>
+                                        <td><input type="number" class="input-compact" value="13.12"></td>
+                                        <td><input type="number" class="input-compact" value="39.37"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="1.76"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="TikTok Ads"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="0"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="0"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="10" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="39"></td>
+                                        <td><input type="number" class="input-compact" value="13.44"></td>
+                                        <td><input type="number" class="input-compact" value="40.32"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="4.08"></td>
+                                    </tr>
+                                    <tr class="action-row">
+                                        <td colspan="9">
+                                            <button class="btn-add-row" onclick="addDnuRow('section-1-body')">+ Add
+                                                Row</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="section-total-row">
+                                        <td>Total</td>
+                                        <td class="total-dnu">0</td>
+                                        <td class="total-budget">0</td>
+                                        <td class="total-cpa">0</td>
+                                        <td class="total-rr">0</td>
+                                        <td class="total-lt30">0</td>
+                                        <td class="total-lt180">0</td>
+                                        <td class="total-arpu">0</td>
+                                        <td class="total-roi">0</td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody id="section-2-body" data-section="2">
+                                    <!-- Section 2: Paid Ads - iOS -->
+                                    <tr class="dnu-section-header">
+                                        <td colspan="9">Section 2. Paid Ads - iOS</td>
+                                    </tr>
+                                    <tr class="dnu-col-header">
+                                        <th>Channel</th>
+                                        <th>DNU</th>
+                                        <th>Budget ($)</th>
+                                        <th>CPA ($)</th>
+                                        <th>DNU D1 RR (%)</th>
+                                        <th>LT30</th>
+                                        <th>LT180</th>
+                                        <th>ARPU ($)</th>
+                                        <th>ROI</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Apple Search Ads"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="250"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="2000"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="8" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="36"></td>
+                                        <td><input type="number" class="input-compact" value="13.44"></td>
+                                        <td><input type="number" class="input-compact" value="40.32"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="5.35"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Meta Ads (iOS)"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="0"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="0"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="20" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="35"></td>
+                                        <td><input type="number" class="input-compact" value="12.00"></td>
+                                        <td><input type="number" class="input-compact" value="38.00"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="1.5"></td>
+                                    </tr>
+                                    <tr class="action-row">
+                                        <td colspan="9">
+                                            <button class="btn-add-row" onclick="addDnuRow('section-2-body')">+ Add
+                                                Row</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="section-total-row">
+                                        <td>Total</td>
+                                        <td class="total-dnu">0</td>
+                                        <td class="total-budget">0</td>
+                                        <td class="total-cpa">0</td>
+                                        <td class="total-rr">0</td>
+                                        <td class="total-lt30">0</td>
+                                        <td class="total-lt180">0</td>
+                                        <td class="total-arpu">0</td>
+                                        <td class="total-roi">0</td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody id="section-3-body" data-section="3">
+                                    <!-- Section 3: Others -->
+                                    <tr class="dnu-section-header">
+                                        <td colspan="9">Section 3. Incentive, Influen MKT, Content Viral, Preload</td>
+                                    </tr>
+                                    <tr class="dnu-col-header">
+                                        <th>Channel</th>
+                                        <th>DNU</th>
+                                        <th>Budget ($)</th>
+                                        <th>CPA ($)</th>
+                                        <th>DNU D1 RR (%)</th>
+                                        <th>LT30</th>
+                                        <th>LT180</th>
+                                        <th>ARPU ($)</th>
+                                        <th>ROI</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Incentive"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="50"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="1500"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="30" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="65"></td>
+                                        <td><input type="number" class="input-compact" value="14.91"></td>
+                                        <td><input type="number" class="input-compact" value="44.74"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="0.88"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Influence MKT"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="50"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="2000"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="40" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="40"></td>
+                                        <td><input type="number" class="input-compact" value="13.44"></td>
+                                        <td><input type="number" class="input-compact" value="40.32"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="0.27"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Content Viral"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="100"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="400"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="4" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="45"></td>
+                                        <td><input type="number" class="input-compact" value="17.44"></td>
+                                        <td><input type="number" class="input-compact" value="52.33"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="15.48"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain" value="Preload">
+                                        </td>
+                                        <td><input type="number" class="input-compact dnu-input" value="300"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="1050"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="3.5" readonly>
+                                        </td>
+                                        <td><input type="number" class="input-compact" value="35"></td>
+                                        <td><input type="number" class="input-compact" value="14.91"></td>
+                                        <td><input type="number" class="input-compact" value="44.74"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="15.11"></td>
+                                    </tr>
+                                    <tr class="action-row">
+                                        <td colspan="9">
+                                            <button class="btn-add-row" onclick="addDnuRow('section-3-body')">+ Add
+                                                Row</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="section-total-row">
+                                        <td>Total</td>
+                                        <td class="total-dnu">0</td>
+                                        <td class="total-budget">0</td>
+                                        <td class="total-cpa">0</td>
+                                        <td class="total-rr">0</td>
+                                        <td class="total-lt30">0</td>
+                                        <td class="total-lt180">0</td>
+                                        <td class="total-arpu">0</td>
+                                        <td class="total-roi">0</td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody id="section-4-body" data-section="4">
+                                    <!-- Section 4: Organic -->
+                                    <tr class="dnu-section-header">
+                                        <td colspan="9">Section 4. Organic iOS, Android</td>
+                                    </tr>
+                                    <tr class="dnu-col-header">
+                                        <th>Channel</th>
+                                        <th>DNU</th>
+                                        <th>Budget ($)</th>
+                                        <th>CPA ($)</th>
+                                        <th>DNU D1 RR (%)</th>
+                                        <th>LT30</th>
+                                        <th>LT180</th>
+                                        <th>ARPU ($)</th>
+                                        <th>ROI</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Organic Android"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="100"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="0" disabled
+                                                style="background-color: #f1f5f9;"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="0" disabled
+                                                style="background-color: #f1f5f9;"></td>
+                                        <td><input type="number" class="input-compact" value="46"></td>
+                                        <td><input type="number" class="input-compact" value="14.35"></td>
+                                        <td><input type="number" class="input-compact" value="57.38"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="" disabled
+                                                style="background-color: #f1f5f9;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="channel-name"><input type="text" class="input-plain"
+                                                value="Organic iOS"></td>
+                                        <td><input type="number" class="input-compact dnu-input" value="39"></td>
+                                        <td><input type="number" class="input-compact budget-input" value="0" disabled
+                                                style="background-color: #f1f5f9;"></td>
+                                        <td><input type="number" class="input-compact cpa-input" value="0" disabled
+                                                style="background-color: #f1f5f9;"></td>
+                                        <td><input type="number" class="input-compact" value="46"></td>
+                                        <td><input type="number" class="input-compact" value="14.35"></td>
+                                        <td><input type="number" class="input-compact" value="57.38"></td>
+                                        <td><input type="number" class="input-compact" value="1.26"></td>
+                                        <td><input type="number" class="input-compact" value="" disabled
+                                                style="background-color: #f1f5f9;"></td>
+                                    </tr>
+                                    <tr class="section-total-row">
+                                        <td>Total</td>
+                                        <td class="total-dnu">0</td>
+                                        <td class="total-budget">0</td>
+                                        <td class="total-cpa">0</td>
+                                        <td class="total-rr">0</td>
+                                        <td class="total-lt30">0</td>
+                                        <td class="total-lt180">0</td>
+                                        <td class="total-arpu">0</td>
+                                        <td class="total-roi">0</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="grand-total-row">
+                                        <td>Grand Total</td>
+                                        <td id="grand-total-dnu">0</td>
+                                        <td id="grand-total-budget">0</td>
+                                        <td id="grand-total-cpa">0</td>
+                                        <td id="grand-total-rr">0</td>
+                                        <td id="grand-total-lt30">0</td>
+                                        <td id="grand-total-lt180">0</td>
+                                        <td id="grand-total-arpu">0</td>
+                                        <td id="grand-total-roi">0</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="dnu-actions">
+                            <button class="btn-secondary" id="btn-back-dnu">Back</button>
+                            <button class="btn-primary">Save & Forecast</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="forecast-controls">
+                    <div class="form-grid">
+                        <!-- Row 1: Date -->
+                        <div class="form-row">
+                            <div class="field-group">
+                                <label class="required">Forecast date</label>
+                                <div class="date-range-group">
+                                    <input type="date" class="input-premium" id="start-date">
+                                    <span class="range-sep">~</span>
+                                    <input type="date" class="input-premium" id="end-date">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: App, Country, OS -->
+                        <div class="form-row three-col">
+                            <div class="field-group">
+                                <label class="required">App ID</label>
+                                <select class="input-premium">
+                                    <option>Market Lenz Global</option>
+                                    <option>IBKR</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label class="required">Country</label>
+                                <select class="input-premium">
+                                    <option>Global (all)</option>
+                                    <option>KR</option>
+                                    <option>US</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label>OS</label>
+                                <select class="input-premium">
+                                    <option>All</option>
+                                    <option>iOS</option>
+                                    <option>Android</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Metrics -->
+                        <div class="form-row four-col">
+                            <div class="field-group">
+                                <label class="required">Current DAU</label>
+                                <input type="text" value="3,600" class="input-premium" id="current-dau">
+                            </div>
+                            <div class="field-group">
+                                <label class="required">LT180</label>
+                                <input type="number" value="88.13" class="input-premium" id="lt180">
+                            </div>
+                            <div class="field-group">
+                                <label class="required">Daily New Users (DNU)</label>
+                                <input type="text" value="1,833" class="input-premium" id="dnu">
+                            </div>
+                            <div class="field-group">
+                                <label>LT30</label>
+                                <input type="number" value="14.69" class="input-premium" id="lt30">
+                            </div>
+                        </div>
+
+                        <!-- Row 4: Advanced -->
+                        <div class="form-row two-col-mixed">
+                            <div class="field-group">
+                                <label class="required">Stock old user decay rate percentiles</label>
+                                <div class="input-with-unit">
+                                    <input type="number" value="60" class="input-premium" id="decay-rate">
+                                    <span class="unit">%</span>
+                                </div>
+                                <span class="field-hint">Addition and subtraction in multiples of 10 only</span>
+                            </div>
+                            <div class="field-group result-display">
+                                <label>Predicted DAU (End Date)</label>
+                                <div class="value-highlight">Calculating...</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Row 2: App, Country, OS -->
-                    <div class="form-row three-col">
-                        <div class="field-group">
-                            <label class="required">App ID</label>
-                            <select class="input-premium">
-                                <option>Market Lenz Global</option>
-                                <option>IBKR</option>
-                            </select>
-                        </div>
-                        <div class="field-group">
-                            <label class="required">Country</label>
-                            <select class="input-premium">
-                                <option>Global (all)</option>
-                                <option>KR</option>
-                                <option>US</option>
-                            </select>
-                        </div>
-                        <div class="field-group">
-                            <label>OS</label>
-                            <select class="input-premium">
-                                <option>All</option>
-                                <option>iOS</option>
-                                <option>Android</option>
-                            </select>
-                        </div>
+                    <div class="action-bar">
+                        <button class="btn-primary">Run Projection</button>
+                        <button class="btn-secondary">Share</button>
                     </div>
+                </div>
+            </section>
 
-                    <!-- Row 3: Metrics -->
-                    <div class="form-row four-col">
-                        <div class="field-group">
-                            <label class="required">Current DAU</label>
-                            <input type="text" value="50,000" class="input-premium" id="current-dau">
-                        </div>
-                        <div class="field-group">
-                            <label class="required">LT365</label>
-                            <input type="number" value="99.18" class="input-premium" id="lt365">
-                        </div>
-                        <div class="field-group">
-                            <label class="required">Daily New Users (DNU)</label>
-                            <input type="text" value="3,000" class="input-premium" id="dnu">
-                        </div>
-                        <div class="field-group">
-                            <label>LT60</label>
-                            <input type="number" value="45.5" class="input-premium" id="lt60">
-                        </div>
-                    </div>
-
-                    <!-- Row 4: Advanced -->
-                    <div class="form-row two-col-mixed">
-                        <div class="field-group">
-                            <label class="required">Stock old user decay rate percentiles</label>
-                            <div class="input-with-unit">
-                                <input type="number" value="50" class="input-premium" id="decay-rate">
-                                <span class="unit">%</span>
+            <div id="forecast-results">
+                <section class="chart-section glass-panel">
+                    <div class="chart-header">
+                        <div class="chart-title">DAU Prediction Trend</div>
+                        <div class="chart-summary">
+                            <div class="summary-item">
+                                <span class="label">Daily New Users</span>
+                                <span class="value">3,000</span>
                             </div>
-                            <span class="field-hint">Addition and subtraction in multiples of 10 only</span>
-                        </div>
-                        <div class="field-group result-display">
-                            <label>Predicted DAU (End Date)</label>
-                            <div class="value-highlight">Calculating...</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="action-bar">
-                    <button class="btn-primary">Forecast</button>
-                    <button class="btn-secondary">Share</button>
-                </div>
-            </section>
-
-            <section class="chart-section glass-panel">
-                <div class="chart-header">
-                    <div class="chart-title">DAU Prediction Trend</div>
-                    <div class="chart-summary">
-                        <div class="summary-item">
-                            <span class="label">Daily New Users</span>
-                            <span class="value">3,000</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="label">Current DAU</span>
-                            <span class="value">50,000</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="label">Predicted DAU</span>
-                            <span class="value">-</span>
+                            <div class="summary-item">
+                                <span class="label">Current DAU</span>
+                                <span class="value">50,000</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Predicted DAU</span>
+                                <span class="value">-</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="chart-container">
-                    <canvas id="dauChart"></canvas>
-                </div>
-            </section>
-
-            <section class="table-section glass-panel">
-                <div class="section-header">
-                    <div class="section-title">
-                        DAU Forecast Detailed Data
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.6;">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M12 16v-4"></path>
-                            <path d="M12 8h.01"></path>
-                        </svg>
+                    <div class="chart-container">
+                        <canvas id="dauChart"></canvas>
                     </div>
-                    <button class="btn-export" id="btn-export">Export CSV</button>
-                </div>
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Operating system</th>
-                                <th>Forecast DAU (total)</th>
-                                <th>Growth (Net)</th>
-                                <th>Growth (%)</th>
-                                <th>Predict new DAU</th>
-                                <th>Forecast stock DAU</th>
-                            </tr>
-                        </thead>
-                        <tbody id="forecast-table-body">
-                            <!-- Populated by JS -->
-                            <tr class="empty-state-row">
-                                <td colspan="5" class="empty-state">No data available</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+                </section>
+
+                <section class="table-section glass-panel">
+                    <div class="section-header">
+                        <div class="section-title">
+                            DAU Forecast Detailed Data
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.6;">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 16v-4"></path>
+                                <path d="M12 8h.01"></path>
+                            </svg>
+                        </div>
+                        <button class="btn-export" id="btn-export">Export CSV</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Operating system</th>
+                                    <th>Forecast DAU (total)</th>
+                                    <th>Growth (Net)</th>
+                                    <th>Growth (%)</th>
+                                    <th>Predict new DAU</th>
+                                    <th>Forecast stock DAU</th>
+                                </tr>
+                            </thead>
+                            <tbody id="forecast-table-body">
+                                <!-- Populated by JS -->
+                                <tr class="empty-state-row">
+                                    <td colspan="5" class="empty-state">No data available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
         </main>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

@@ -6,3 +6,5 @@ users.db
 .idea/
 .vscode/
 .env
+.vercel
+.env*.local
